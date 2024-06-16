@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pong</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" type="module"></script>
+  </head>
+
+  <body>
+    <div class="game-container" id="gameContainer">
+      <h2 class="game-name">Pong</h2>
+      <div class="game-div" id="gameDiv">
+        <div class="score">
+          <div id="player-score">0</div>
+          <div id="computer-score">0</div>
+        </div>
+        <div class="ball" id="ball"></div>
+        <div class="paddle left" id="player-paddle"></div>
+        <div class="paddle right" id="computer-paddle"></div>
+      </div>
+      <div class="game-mode-controls" id="game-mode-controls">
+        <button
+          class="game-mode-button colour-switch-mode"
+          id="ColorModeSwitchBtn"
+        >
+          Color Switch Mode
+          <span class="mode-on-off" id="ColorModeStatus">Off</span>
+        </button>
+        <button
+          class="game-mode-button random-speed-mode"
+          id="RandomSpeedModeBtn"
+        >
+          Random Speed Mode
+          <span class="mode-on-off" id="RandSpeedModeStatus">Off</span>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
