@@ -4,7 +4,8 @@ import Invaders from "./invaders.js";
 import Ship from "./ship.js";
 import Laser from "./laser.js";
 import { eventEmitter } from "./EventEmitter.js";
-import "./space-invaders-style.css";
+import "./space-invader-styles.css";
+import "./images/SpaceInvadersGreen.png";
 
 export default function SpaceInvaders() {
   const gameElemRef = useRef(null);
@@ -20,7 +21,7 @@ export default function SpaceInvaders() {
 
     // Create Game Objects
     const squares = Array.from(grid.querySelectorAll("div"));
-    const asteroid = new Asteroid(squares, currentShooterIndex);
+    //const asteroid = new Asteroid(squares, currentShooterIndex);
     const invaders = new Invaders(squares, currentShooterIndex); // Create Invaders instance
     const ship = new Ship(squares);
     const laser = new Laser(squares, currentShooterIndex, invaders);

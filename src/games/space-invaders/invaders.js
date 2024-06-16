@@ -1,4 +1,5 @@
 import { eventEmitter } from "./EventEmitter.js";
+import SpaceInvadersGreen from "./images/SpaceInvadersGreen.png";
 
 const gridWidth = 15; // Assuming this is defined somewhere for grid calculations
 
@@ -55,7 +56,8 @@ export default class Invaders {
       const img = document.createElement("img");
       // src/games/space-invaders//images/SpaceInvadersGreen.png
       //games/space-invaders/space-invaders.js
-      img.src = "/images/SpaceInvadersGreen.png";
+      //img.src = "./images/SpaceInvadersGreen.png";
+      img.src = SpaceInvadersGreen;
       img.alt = "InvaderImg"; // Adding alt text for accessibility
       img.id = "invaderImg";
       img.style.width = "100%"; // Ensures the image fits the square

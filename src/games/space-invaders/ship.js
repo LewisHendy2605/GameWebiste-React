@@ -1,4 +1,5 @@
 import { eventEmitter } from "./EventEmitter.js";
+import Shipimg from "./images/Ship.png";
 
 let currentShooterIndex = 202;
 let game_grid_divs = [];
@@ -36,7 +37,7 @@ export default class Ship {
     // Check if the image is already appended
     if (!shooter.querySelector("img")) {
       const img = document.createElement("img");
-      img.src = "images/Ship.png";
+      img.src = Shipimg;
       img.id = "shooterImg";
       img.style.width = "100%"; // Ensures the image fits the square
       img.style.height = "100%"; // Ensures the image fits the square

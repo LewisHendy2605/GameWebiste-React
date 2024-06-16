@@ -1,4 +1,5 @@
 import { eventEmitter } from "./EventEmitter.js";
+import Ateroidimg from "./images/asteroid.png";
 
 let asteroid_index = 0;
 let game_grid_divs = [];
@@ -26,7 +27,7 @@ export default class Asteroid {
     // Check if the image is already appended
     if (!square.querySelector("img")) {
       const img = document.createElement("img");
-      img.src = "images/asteroid.png";
+      img.src = Ateroidimg;
       img.id = "asteroidImg";
       img.style.width = "100%"; // Ensures the image fits the square
       img.style.height = "100%"; // Ensures the image fits the square
