@@ -1,16 +1,19 @@
 import { eventEmitter } from "./EventEmitter.js";
 import SpaceInvadersGreen from "./images/SpaceInvadersGreen.png";
 
-const gridWidth = 15; // Assuming this is defined somewhere for grid calculations
+const gridWidth = 15;
+const resultDisplay = document.getElementsByClassName("results")[0];
 
 export default class Invaders {
-  constructor(squares, shooterIndex) {
+  constructor(squares, shooterIndex, updateGameDivs, setShooterIndexState) {
     this.alienInvaders = [
       0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 30,
       31, 32, 33, 34, 35, 36, 37, 38, 39,
     ];
     this.invadersRemoved = [];
-    this.gameGridDivs = squares; // Storing squares as a property for use in methods
+    this.gameGridDivs = squares;
+    this.setShooterIndexState = setShooterIndexState;
+    this.updateGameDivs = updateGameDivs;
     this.isGoingRight = true;
     this.direction = 1;
     this.currentShooterIndex = shooterIndex;
@@ -48,36 +51,19 @@ export default class Invaders {
   }
 
   addInvaders(i) {
-    const square = this.gameGridDivs[this.alienInvaders[i]];
-    square.classList.add("invader");
-
-    // Check if the image is already appended
-    if (!square.querySelector("img")) {
-      const img = document.createElement("img");
-      // src/games/space-invaders//images/SpaceInvadersGreen.png
-      //games/space-invaders/space-invaders.js
-      //img.src = "./images/SpaceInvadersGreen.png";
-      img.src = SpaceInvadersGreen;
-      img.alt = "InvaderImg"; // Adding alt text for accessibility
-      img.id = "invaderImg";
-      img.style.width = "100%"; // Ensures the image fits the square
-      img.style.height = "100%"; // Ensures the image fits the square
-      square.appendChild(img);
-    }
+    const invaderIndex = this.alienInvaders[i];
+    this.updateGameDivs(invaderIndex, "add", "invader", SpaceInvadersGreen);
   }
 
   removeInvaders() {
     for (let i = 0; i < this.alienInvaders.length; i++) {
-      this.gameGridDivs[this.alienInvaders[i]].classList.remove("invader");
-      const img =
-        this.gameGridDivs[this.alienInvaders[i]].querySelector("#invaderImg");
-      if (img) {
-        img.remove(); // This removes the img element from the DOM
-      }
+      const invaderIndex = this.alienInvaders[i];
+      this.updateGameDivs(invaderIndex, "remove", "invader");
     }
   }
 
   moveInvaders() {
+    //console.log("Shhoter index from invaders class" + this.currentShooterIndex);
     const leftEdge = this.alienInvaders[0] % gridWidth === 0;
     const rightEdge =
       this.alienInvaders[this.alienInvaders.length - 1] % gridWidth ===
@@ -111,11 +97,13 @@ export default class Invaders {
       this.gameGridDivs[this.currentShooterIndex].classList.contains("invader")
     ) {
       // Handle game over logic
-      clearInterval(this.invadersId); // Clear interval on game over
+      //resultDisplay.innerHTML = "GAME OVER";  // have to do with state
+      clearInterval(this.invadersId);
     }
     if (this.invadersRemoved.length === this.alienInvaders.length) {
       // Handle win condition logic
-      clearInterval(this.invadersId); // Clear interval on win
+      //.innerHTML = "YOU WIN";
+      clearInterval(this.invadersId);
     }
   }
 }

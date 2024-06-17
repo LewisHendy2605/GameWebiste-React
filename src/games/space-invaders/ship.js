@@ -2,13 +2,19 @@ import { eventEmitter } from "./EventEmitter.js";
 import Shipimg from "./images/Ship.png";
 
 let currentShooterIndex = 202;
-let game_grid_divs = [];
 const grid_width = 15;
 
 export default class Ship {
-  constructor(squares) {
-    game_grid_divs = squares;
-    this.currentShooterIndex = currentShooterIndex; // Initialize currentShooterIndex
+  constructor(
+    shooterIndexState,
+    squares,
+    updateGameDivs,
+    setShooterIndexState
+  ) {
+    this.game_grid_divs = squares;
+    this.updateGameDivs = updateGameDivs;
+    this.setShooterIndexState = setShooterIndexState;
+    this.currentShooterIndex = shooterIndexState; // Initialize currentShooterIndex
 
     this.addShooter = this.addShooter.bind(this); // Bind methods
     this.moveShooterLeft = this.moveShooterLeft.bind(this);
@@ -27,22 +33,12 @@ export default class Ship {
   }
 
   setShooterIndex(shooterIndex) {
-    this.currentShooterIndex = shooterIndex;
+    //this.currentShooterIndex = shooterIndex;
+    this.setShooterIndexState(shooterIndex);
   }
 
   addShooter() {
-    const shooter = game_grid_divs[this.currentShooterIndex];
-
-    shooter.classList.add("shooter");
-    // Check if the image is already appended
-    if (!shooter.querySelector("img")) {
-      const img = document.createElement("img");
-      img.src = Shipimg;
-      img.id = "shooterImg";
-      img.style.width = "100%"; // Ensures the image fits the square
-      img.style.height = "100%"; // Ensures the image fits the square
-      shooter.appendChild(img);
-    }
+    this.updateGameDivs(this.currentShooterIndex, "add", "shooter", Shipimg);
   }
 
   moveShooter(e) {
@@ -51,10 +47,12 @@ export default class Ship {
       case "ArrowLeft":
         if (this.currentShooterIndex % grid_width !== 0)
           this.currentShooterIndex -= 1;
+        this.setShooterIndexState(this.currentShooterIndex);
         break;
       case "ArrowRight":
         if (this.currentShooterIndex % grid_width < grid_width - 1)
           this.currentShooterIndex += 1;
+        this.setShooterIndexState(this.currentShooterIndex);
         break;
     }
     this.addShooter();
@@ -62,18 +60,15 @@ export default class Ship {
   }
 
   removeShooter() {
-    const shooterElem = game_grid_divs[this.currentShooterIndex];
-    shooterElem.classList.remove("shooter");
-    const shooterImg = shooterElem.querySelector("#shooterImg");
-    if (shooterImg) {
-      shooterImg.remove();
-    }
+    this.updateGameDivs(this.currentShooterIndex, "remove", "shooter");
   }
 
   moveShooterLeft() {
     this.removeShooter();
-    if (this.currentShooterIndex % grid_width !== 0)
+    if (this.currentShooterIndex % grid_width !== 0) {
       this.currentShooterIndex -= 1;
+      this.setShooterIndexState(this.currentShooterIndex);
+    }
     this.addShooter();
     eventEmitter.emit("changeShooterIndex", this.currentShooterIndex);
   }
@@ -81,8 +76,10 @@ export default class Ship {
   moveShooterRight() {
     this.removeShooter();
 
-    if (this.currentShooterIndex % grid_width < grid_width - 1)
+    if (this.currentShooterIndex % grid_width < grid_width - 1) {
       this.currentShooterIndex += 1;
+      this.setShooterIndexState(this.currentShooterIndex);
+    }
     this.addShooter();
     eventEmitter.emit("changeShooterIndex", this.currentShooterIndex);
   }
