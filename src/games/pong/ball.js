@@ -15,13 +15,23 @@ if (SLOW_MODE) {
   VELOCITY_INCREASE = 0.00001;
 }
 
-let gameRect = document.getElementById("gameDiv").getBoundingClientRect();
+//let gameRect = document.getElementById("gameDiv").getBoundingClientRect();
 
-const WINDOW_HEIGHT = gameRect.height;
-const WINDOW_WIDTH = gameRect.width;
+/*
+const WINDOW_HEIGHT = document
+  .getElementById("gameDiv")
+  .getBoundingClientRect().height;
+const WINDOW_WIDTH = document
+  .getElementById("gameDiv")
+  .getBoundingClientRect().width;
+  */
+const WINDOW_HEIGHT = 15;
+const WINDOW_WIDTH = null;
 
 export default class Ball {
   constructor(ballElem) {
+    this.WINDOW_HEIGHT = 0;
+    this.gameRect = document.getElementById("gameDiv").getBoundingClientRect();
     this.ballElem = ballElem;
     this.lastWallCollisionTime = 0;
     this.lastPaddleCollisionTime = 0;
@@ -109,7 +119,7 @@ export default class Ball {
 
     // Wall collision check with cooldown
     if (currentTime - this.lastWallCollisionTime >= THROTTLE_TIME) {
-      if (ballRect.bottom >= WINDOW_HEIGHT || ballRect.top <= 0) {
+      if (ballRect.bottom >= this.WINDOW_HEIGHT || ballRect.top <= 0) {
         this.direction.y *= -1;
         this.lastWallCollisionTime = currentTime;
       }

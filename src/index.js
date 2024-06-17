@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-
+import Pong from "./games/pong/Pong.js";
 import SpaceInvaders from "./games/space-invaders/space-invaders.js";
 import Home from "./components/Home.js";
 import NavBar from "./components/NavBar.js";
@@ -35,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "spaceinvaders",
         element: <SpaceInvaders />,
+      },
+      {
+        path: "pong",
+        element: <Pong />,
       },
     ],
   },

@@ -20,7 +20,7 @@ export const SidebarData = [
   },
   {
     title: "Pong",
-    path: "/",
+    path: "/pong",
     icon: <RiPingPongFill />,
     cName: "nav-text",
   },
