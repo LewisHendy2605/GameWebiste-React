@@ -1,17 +1,16 @@
 {
   "files": {
-    "main.css": "/GameWebiste-React/static/css/main.bed3c6bd.css",
-    "main.js": "/GameWebiste-React/static/js/main.f3511d4c.js",
+    "main.css": "/GameWebiste-React/static/css/main.25de8f24.css",
+    "main.js": "/GameWebiste-React/static/js/main.496f1beb.js",
     "static/js/453.1ba9ff7d.chunk.js": "/GameWebiste-React/static/js/453.1ba9ff7d.chunk.js",
     "static/media/asteroid.png": "/GameWebiste-React/static/media/asteroid.a6737bd42f9bca4cdb42.png",
-    "static/media/logo.svg": "/GameWebiste-React/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/GameWebiste-React/index.html",
-    "main.bed3c6bd.css.map": "/GameWebiste-React/static/css/main.bed3c6bd.css.map",
-    "main.f3511d4c.js.map": "/GameWebiste-React/static/js/main.f3511d4c.js.map",
+    "main.25de8f24.css.map": "/GameWebiste-React/static/css/main.25de8f24.css.map",
+    "main.496f1beb.js.map": "/GameWebiste-React/static/js/main.496f1beb.js.map",
     "453.1ba9ff7d.chunk.js.map": "/GameWebiste-React/static/js/453.1ba9ff7d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bed3c6bd.css",
-    "static/js/main.f3511d4c.js"
+    "static/css/main.25de8f24.css",
+    "static/js/main.496f1beb.js"
   ]
 }
