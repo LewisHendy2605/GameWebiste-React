@@ -8,13 +8,13 @@ import { RiPingPongFill } from "react-icons/ri";
 export const SidebarData = [
   {
     title: "Home",
-    path: "/",
+    path: "/GameWebiste-React",
     icon: <AiIcons.AiFillHome />,
     cName: "nav-text",
   },
   {
-    title: "Space Invaders",
-    path: "/",
+    title: "SpaceInvaders",
+    path: "/spaceinvaders",
     icon: <IoLogoGameControllerA />,
     cName: "nav-text",
   },
