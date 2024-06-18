@@ -68,28 +68,32 @@
 
 .score {
   display: flex;
-  justify-content: center;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
   font-weight: bold;
   font-size: 7vh;
   color: var(--foreground-color);
+  width: 100%;
+  margin-top: 1vh;
 }
 
-.score > * {
-  flex-grow: 1;
-  flex-basis: 0;
-  padding: 0 2vh;
-  margin: 1vh 0;
-  opacity: 0.5;
+.score {
+  padding: 0 2vh; /* Adjust padding for left and right spacing */
+  margin: 0;
+  line-height: 7vh; /* Ensure the line height matches the font size for vertical centering */
 }
 
-.score > :first-child {
-  text-align: right;
+.score :first-child {
+  flex-grow: 1; /* Allow the first child to grow and fill remaining space */
   border-right: 0.5vh solid var(--foreground-color);
+}
+.score > :nth-child(2) {
+  flex-grow: 1; /* Allow the second child to grow and fill remaining space */
 }
 .game-mode-controls {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
 }
 

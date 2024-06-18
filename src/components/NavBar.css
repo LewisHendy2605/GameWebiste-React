@@ -4,6 +4,7 @@
   display: flex;
   justify-content: start;
   align-items: center;
+  z-index: 1000; /* Ensure it is above other content */
 }
 
 .menu-bars {
@@ -22,6 +23,7 @@
   top: 0;
   left: -100%; /* This is the key to hide the menu */
   transition: 850ms;
+  z-index: 1001;
 }
 
 .nav-menu.active {
