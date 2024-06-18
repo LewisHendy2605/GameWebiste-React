@@ -1,29 +1,48 @@
-//import Ball from "./ball.js";
-//import Paddle from "./paddle.js";
-//import PongModeControls from "./PongModeControls.js";
+import Ball from "./ball.js";
+import Paddle from "./paddle.js";
+import PongModeControls from "./PongModeControls.js";
 import React, { Component } from "react";
 import "./Pong.css";
 
-//let gameRect = document.getElementById("gameDiv").getBoundingClientRect();
-
-//const WINDOW_HEIGHT = document.getElementById("gameDiv").clientHeight;
-//const WINDOW_WIDTH = document.getElementById("gameDiv").clientWidth;
-const WINDOW_HEIGHT = 0;
-const WINDOW_WIDTH = 0;
 export default class Pong extends Component {
   constructor() {
     super();
-    this.gameDiv = document.getElementById("gameDiv");
-    console.log("GameDiv: " + this.gameDiv);
+    this.state = {
+      gameDiv: null,
+      windowHeight: 0,
+      windowWidth: 0,
+      ball: null,
+      playerPaddle: null,
+      computerPaddle: null,
+    };
 
-    /*
-    this.ball = new Ball(document.getElementById("ball"));
+    this.update = this.update.bind(this);
+
+    // Listeners
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.handleTouchMove = this.handleTouchMove.bind(this);
+  }
+
+  componentDidMount() {
+    this.gameDiv = document.getElementById("gameDivPong");
+    this.windowHeight = this.gameDiv.clientHeight;
+    this.windowWidth = this.gameDiv.clientWidth;
+
+    this.ball = new Ball(
+      document.getElementById("ball"),
+      this.gameDiv,
+      this.windowHeight
+    );
     this.playerPaddle = new Paddle(
       document.getElementById("player-paddle"),
-      document.getElementById("gameDiv"),
-      WINDOW_HEIGHT
+      this.gameDiv,
+      this.windowHeight
     );
-    this.computerPaddle = new Paddle(document.getElementById("computer-paddle"),document.getElementById("gameDiv"),WINDOW_HEIGHT);
+    this.computerPaddle = new Paddle(
+      document.getElementById("computer-paddle"),
+      this.gameDiv,
+      this.windowHeight
+    );
     this.mode_controls = new PongModeControls();
     this.mode_controls.startControls();
 
@@ -35,26 +54,26 @@ export default class Pong extends Component {
     this.BODY_HEIGHT = this.bodyRect.height;
     this.BODY_WIDTH = this.bodyRect.width;
 
-    */
+    document.addEventListener("mousemove", this.handleMouseMove);
+    document.addEventListener("touchmove", this.handleTouchMove);
 
-    this.lastTime = null;
-
-    this.update = this.update.bind(this);
-
-    // Listerners
-    document.addEventListener("mousemove", (e) => {
-      this.playerPaddle?.move(e);
-    });
-
-    document.addEventListener("touchmove", (e) => {
-      const touch = e.touches[0];
-      const rect = this.gameDiv.getBoundingClientRect();
-      const touchY = touch.clientY - rect.top; // Touch Y position relative to gameDiv top
-      this.playerPaddle.position = (touchY / WINDOW_HEIGHT) * 100;
-    });
-
-    console.log("lasttime: " + this.lastTime);
     window.requestAnimationFrame(this.update);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousemove", this.handleMouseMove);
+    document.removeEventListener("touchmove", this.handleTouchMove);
+  }
+
+  handleMouseMove(e) {
+    this.playerPaddle?.move(e);
+  }
+
+  handleTouchMove(e) {
+    const touch = e.touches[0];
+    const rect = this.gameDiv.getBoundingClientRect();
+    const touchY = touch.clientY - rect.top; // Touch Y position relative to gameDiv top
+    this.playerPaddle.position = (touchY / this.windowHeight) * 100;
   }
 
   update(time) {
@@ -79,12 +98,12 @@ export default class Pong extends Component {
 
   isLose() {
     const center = this.ball.center;
-    return center.x >= WINDOW_WIDTH || center.x <= 0;
+    return center.x >= this.windowWidth || center.x <= 0;
   }
 
   handleLose() {
     const center = this.ball.center; // Get the center of the ball
-    if (center.x >= WINDOW_WIDTH) {
+    if (center.x >= this.windowWidth) {
       this.playerScoreElem.textContent =
         parseInt(this.playerScoreElem.textContent) + 1;
     } else if (center.x <= 0) {
@@ -108,7 +127,7 @@ export default class Pong extends Component {
       <>
         <div className="game-container" id="gameContainer">
           <h2 className="game-name">Pong</h2>
-          <div className="game-div-pong" id="gameDiv">
+          <div className="game-div-pong" id="gameDivPong">
             <div className="score">
               <div id="player-score">0</div>
               <div id="computer-score">0</div>

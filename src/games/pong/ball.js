@@ -1,19 +1,9 @@
 import { eventEmitter } from "./EventEmitter.js"; // called when ball hits paddle
 
-const SLOW_MODE = false;
-
 const THROTTLE_TIME = 100; // Time in milliseconds
 
-let INITIAL_VELOCITY = null;
-let VELOCITY_INCREASE = null;
-
-if (SLOW_MODE) {
-  INITIAL_VELOCITY = 0.0025;
-  VELOCITY_INCREASE = 0.000001;
-} else {
-  INITIAL_VELOCITY = 0.025;
-  VELOCITY_INCREASE = 0.00001;
-}
+let INITIAL_VELOCITY = 0.025;
+let VELOCITY_INCREASE = 0.00001;
 
 //let gameRect = document.getElementById("gameDiv").getBoundingClientRect();
 
@@ -25,13 +15,11 @@ const WINDOW_WIDTH = document
   .getElementById("gameDiv")
   .getBoundingClientRect().width;
   */
-const WINDOW_HEIGHT = 15;
-const WINDOW_WIDTH = null;
 
 export default class Ball {
-  constructor(ballElem) {
-    this.WINDOW_HEIGHT = 0;
-    this.gameRect = document.getElementById("gameDiv").getBoundingClientRect();
+  constructor(ballElem, gameDiv, windowHeight) {
+    this.windowHeight = windowHeight;
+    this.gameRect = gameDiv.getBoundingClientRect();
     this.ballElem = ballElem;
     this.lastWallCollisionTime = 0;
     this.lastPaddleCollisionTime = 0;
@@ -72,21 +60,18 @@ export default class Ball {
   setBallSpeed({ initial_velocity, velocity_increase }) {
     VELOCITY_INCREASE = velocity_increase;
     this.velocity = initial_velocity; // Reset current velocity to new initial velocity
-    console.log(
-      `Ball speed changed to: Initial Velocity = ${initial_velocity}, Velocity Increase = ${VELOCITY_INCREASE}`
-    );
+    //console.log(`Ball speed changed to: Initial Velocity = ${initial_velocity}, Velocity Increase = ${VELOCITY_INCREASE}`);
   }
 
   rect() {
     const ballRect = this.ballElem.getBoundingClientRect();
-    const gameRect = document.getElementById("gameDiv").getBoundingClientRect();
 
     // Adjust rect coordinates relative to gameDiv
     return {
-      top: ballRect.top - gameRect.top,
-      right: ballRect.right - gameRect.left,
-      bottom: ballRect.bottom - gameRect.top,
-      left: ballRect.left - gameRect.left,
+      top: ballRect.top - this.gameRect.top,
+      right: ballRect.right - this.gameRect.left,
+      bottom: ballRect.bottom - this.gameRect.top,
+      left: ballRect.left - this.gameRect.left,
       width: ballRect.width,
       height: ballRect.height,
     };
@@ -119,7 +104,7 @@ export default class Ball {
 
     // Wall collision check with cooldown
     if (currentTime - this.lastWallCollisionTime >= THROTTLE_TIME) {
-      if (ballRect.bottom >= this.WINDOW_HEIGHT || ballRect.top <= 0) {
+      if (ballRect.bottom >= this.windowHeight || ballRect.top <= 0) {
         this.direction.y *= -1;
         this.lastWallCollisionTime = currentTime;
       }
