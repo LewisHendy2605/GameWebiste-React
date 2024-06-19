@@ -8,14 +8,18 @@ import "./space-invader-styles.css";
 
 export default function SpaceInvaders() {
   const gameElemRef = useRef(null);
+  const resultsDivRef = useRef(null);
   let [gameDivs, setGameDivs] = useState([]);
   let currentShooterIndex = 202;
   const [gameObjectsInitialized, setGameObjectsInitialized] = useState(false);
   const [shooterIndexState, setShooterIndexState] = useState(202);
+  let resultsDiv = null;
 
   useEffect(() => {
     const gameElem = gameElemRef.current;
     const grid = gameElem.querySelector(".grid");
+    resultsDivRef.current = gameElem.querySelector(".results");
+
     const width = 15;
     let invadersId;
 
@@ -38,11 +42,13 @@ export default function SpaceInvaders() {
     if (!gameObjectsInitialized && gameDivs.length > 0) {
       //const asteroid = new Asteroid(squares, currentShooterIndex);
       //const currentShooterIndex = 202; // You may need to keep this consistent with your game state
+      console.log("Passing resultsDiv " + resultsDivRef.current); // is null
       let invaders = new Invaders(
         gameDivs,
         shooterIndexState,
         updateGameDivs,
-        setShooterIndexState
+        setShooterIndexState,
+        resultsDivRef.current
       );
       let ship = new Ship(
         shooterIndexState,

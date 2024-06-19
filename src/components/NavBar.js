@@ -5,10 +5,18 @@ import { Link } from "react-router-dom";
 import { SidebarData } from "./SideBarData";
 import "./NavBar.css";
 import { IconContext } from "react-icons";
+import DropDownItem from "./dropDownItem.js";
 
 export default function NavBar() {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
+
+  const [aboutMeLinks, setaboutMeLinks] = useState(false);
+  const showAboutMeLinks = () => {
+    console.log(aboutMeLinks);
+    setaboutMeLinks(!aboutMeLinks);
+  };
+
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
@@ -16,6 +24,9 @@ export default function NavBar() {
           <Link to="#" className="menu-bars">
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
+          <div className="navbar-items" onClick={showAboutMeLinks}>
+            <h2>About Me</h2>
+          </div>
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items" onClick={showSidebar}>
@@ -36,6 +47,7 @@ export default function NavBar() {
             })}
           </ul>
         </nav>
+        <DropDownItem active={aboutMeLinks} />
       </IconContext.Provider>
     </>
   );

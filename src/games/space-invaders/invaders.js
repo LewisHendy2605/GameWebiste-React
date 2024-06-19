@@ -5,7 +5,13 @@ const gridWidth = 15;
 const resultDisplay = document.getElementsByClassName("results")[0];
 
 export default class Invaders {
-  constructor(squares, shooterIndex, updateGameDivs, setShooterIndexState) {
+  constructor(
+    squares,
+    shooterIndex,
+    updateGameDivs,
+    setShooterIndexState,
+    resultsDiv
+  ) {
     this.alienInvaders = [
       0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 30,
       31, 32, 33, 34, 35, 36, 37, 38, 39,
@@ -18,6 +24,8 @@ export default class Invaders {
     this.direction = 1;
     this.currentShooterIndex = shooterIndex;
     this.invadersId = null; // Initialize invadersId property
+    this.resultsDiv = resultsDiv;
+    console.log("Recievibng resultsDib: " + this.resultsDiv);
 
     this.createInvaders();
   }
@@ -97,12 +105,14 @@ export default class Invaders {
       this.gameGridDivs[this.currentShooterIndex].classList.contains("invader")
     ) {
       // Handle game over logic
-      //resultDisplay.innerHTML = "GAME OVER";  // have to do with state
+      console.log("ResultsDiv invades test" + this.resultsDiv);
+      this.resultsDiv.textContent = "GAME OVER !!!! "; // have to do with state
       clearInterval(this.invadersId);
     }
     if (this.invadersRemoved.length === this.alienInvaders.length) {
       // Handle win condition logic
-      //.innerHTML = "YOU WIN";
+      console.log("ResultsDiv invades test" + this.resultsDiv);
+      this.resultsDiv.textContent = "YOU WIN !!!!";
       clearInterval(this.invadersId);
     }
   }

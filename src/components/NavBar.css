@@ -2,9 +2,24 @@
   background-color: #060b26;
   height: 80px;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
+  position: relative;
   z-index: 1000; /* Ensure it is above other content */
+}
+
+.navbar-items {
+  color: white;
+  margin-right: 10rem;
+  cursor: pointer;
+  position: relative;
+}
+.navbar-item {
+  position: absolute;
+  top: 0; /* Position below the navbar-items */
+  right: 0; /* Align to the right side */
+  transition: 325ms;
+  z-index: 999;
 }
 
 .menu-bars {
@@ -17,7 +32,7 @@
   background-color: #060b26;
   width: 250px;
   height: 100vh;
-  display: felx;
+  display: flex;
   justify-content: center;
   position: fixed;
   top: 0;
