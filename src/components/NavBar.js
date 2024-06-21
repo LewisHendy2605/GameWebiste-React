@@ -47,6 +47,7 @@ export default function NavBar() {
             })}
           </ul>
         </nav>
+        <h2> Lewis Website</h2>
         <DropDownItem active={aboutMeLinks} />
       </IconContext.Provider>
     </>
