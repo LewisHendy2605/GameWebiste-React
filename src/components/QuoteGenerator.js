@@ -13,13 +13,16 @@ export default function QuoteGenerator() {
       // Check if response is not empty and is an array of arrays
       if (responseJSON.length > 0 && Array.isArray(responseJSON[0])) {
         // Get the first conversation and join the quotes into a single string
-        const firstConversation = responseJSON[0];
+        const randNum = Math.floor(
+          Math.random() * (responseJSON.length - 0 + 1) + 0
+        );
+        const firstConversation = responseJSON[randNum];
         const conversationText = firstConversation
           .map((quoteObj) => `${quoteObj.character}: ${quoteObj.quote}`)
-          .join(" ");
+          .join("<br>");
 
-        console.log("Response:", conversationText[0]);
-        //setQuote(conversationText);
+        //console.log("Response:", conversationText);
+        setQuote(conversationText);
       } else {
         console.log("No quotes available");
         setQuote("No quotes available");
@@ -31,7 +34,10 @@ export default function QuoteGenerator() {
 
   return (
     <div>
-      <p>{quote}</p>
+      <p
+        dangerouslySetInnerHTML={{ __html: quote }}
+        style={{ fontSize: "20px" }}
+      ></p>
       <button onClick={getQuote}>Get Quote</button>
     </div>
   );
