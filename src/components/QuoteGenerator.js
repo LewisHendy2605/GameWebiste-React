@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./QuoteGenerator.css";
 
 export default function QuoteGenerator() {
   const [quote, setQuote] = useState("null");
@@ -33,12 +34,17 @@ export default function QuoteGenerator() {
   };
 
   return (
-    <div>
+    <div className="tpb-div">
+      <div className="tpb-quote-title">
+        <h3 className="tpb-h3title">Trailer Park Boys Quote API (Custom)</h3>
+      </div>
       <p
+        className="tpb-quote-p"
         dangerouslySetInnerHTML={{ __html: quote }}
-        style={{ fontSize: "20px" }}
       ></p>
-      <button onClick={getQuote}>Get Quote</button>
+      <button className="tpb-get-btn" onClick={getQuote}>
+        Get Quote
+      </button>
     </div>
   );
 }

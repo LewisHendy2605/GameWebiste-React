@@ -4,6 +4,7 @@ import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 import { IoLogoGameControllerA } from "react-icons/io";
 import { RiPingPongFill } from "react-icons/ri";
+import { LuFileJson } from "react-icons/lu";
 
 export const SidebarData = [
   {
@@ -14,14 +15,20 @@ export const SidebarData = [
   },
   {
     title: "SpaceInvaders",
-    path: "/spaceinvaders",
+    path: "/GameWebiste-React/spaceinvaders",
     icon: <IoLogoGameControllerA />,
     cName: "nav-text",
   },
   {
     title: "Pong",
-    path: "/pong",
+    path: "/GameWebiste-React/pong",
     icon: <RiPingPongFill />,
+    cName: "nav-text",
+  },
+  {
+    title: "Api",
+    path: "/GameWebiste-React/api",
+    icon: <LuFileJson />,
     cName: "nav-text",
   },
 ];

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./Location.css";
 
 const LocationComponent = () => {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
@@ -47,14 +48,22 @@ const LocationComponent = () => {
   }, []);
 
   return (
-    <div>
+    <div className="location-div">
+      <div className="location-title">
+        <h3 className="location-h3title">Location API</h3>
+      </div>
       {error && <p>Error: {error}</p>}
+      {address ? (
+        <p className="address-p">Address: {address}</p>
+      ) : (
+        <p>Loading...</p>
+      )}
       {location.latitude && location.longitude && (
-        <p>
+        <p className="latlong-p">
           Latitude: {location.latitude}, Longitude: {location.longitude}
         </p>
       )}
-      {address ? <p>Address: {address}</p> : <p>Loading...</p>}
+      <p style={{ fontSize: "25px" }}>..... Still Under Construction .....</p>
     </div>
   );
 };
